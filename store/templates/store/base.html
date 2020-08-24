@@ -16,7 +16,7 @@
 <body>
     <!-- nav bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Eshop</a>
+        <a class="navbar-brand" href="/">Eshop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,14 +25,25 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Store <span class="sr-only">(current)</span></a>
+                    <a href="#" class="nav-link" href="#">Store <span class="sr-only">(current)</span></a>
                 </li>
 
             </ul>
 
             <ul class="navbar-nav my-2 my-lg-0">
+                {% if request.session.customer %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Logout <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/cart">Cart <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/orders">Orders <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout <span class="sr-only">(current)</span></a>
+                </li>
+                {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/cart">Cart <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/signup">Signup <span class="sr-only">(current)</span></a>
@@ -40,6 +51,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
