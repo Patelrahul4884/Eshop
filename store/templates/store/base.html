@@ -9,8 +9,31 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Eshop</title>
+    <style>
+        .badge {
+            padding-left: 10px;
+            padding-right: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        .label-warning[href],
+        .badge-warning[href] {
+            background-color: #c67605;
+        }
+
+        #lblCartCount {
+            font-size: 15px;
+            background: #ff0000;
+            color: #fff;
+            padding: 0 5px;
+            vertical-align: top;
+            margin-left: -10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,10 +54,13 @@
             </ul>
 
             <ul class="navbar-nav my-2 my-lg-0">
-                {% if request.session.customer %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="/cart">Cart <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/cart"><i class="fa" style="font-size:25px">&#xf07a;</i>
+                        <span class='badge badge-warning' id='lblCartCount'> {{request.session.cart.keys|length}}
+                        </span>
+                        </i></a>
                 </li>
+                {% if request.session.customer %}
                 <li class="nav-item active">
                     <a class="nav-link" href="/orders">Orders <span class="sr-only">(current)</span></a>
                 </li>
@@ -42,9 +68,6 @@
                     <a class="nav-link" href="/logout">Logout <span class="sr-only">(current)</span></a>
                 </li>
                 {% else %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="/cart">Cart <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/signup">Signup <span class="sr-only">(current)</span></a>
                 </li>
