@@ -18,7 +18,6 @@ class Login(View):
             flag=check_password(password,customer.password)
             if flag:
                 request.session['customer']=customer.id
-                
                 if Login.return_url:
                     return HttpResponseRedirect(Login.return_url)
                 else:
@@ -28,7 +27,7 @@ class Login(View):
             else:
                 error_message='Email or password invalid!!'
         else:
-            error_message='Email or password invalid!!'
+            error_message='User with this email Not exist!'
         return render(request,'store/login.html',{'error':error_message})
 
 

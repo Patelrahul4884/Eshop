@@ -30,7 +30,7 @@ class Signup(View):
         if not error_message:
             customer.password=make_password(customer.password)
             customer.register()
-            return redirect('all')
+            return redirect('login')
         else:
             data={
                 'error':error_message,

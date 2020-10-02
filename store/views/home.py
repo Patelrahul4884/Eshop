@@ -6,11 +6,25 @@ from django.views import View
 
 
 class Index(View):
+    def get(self,request):
+        cart=request.session.get('cart')
+        if not cart:
+            request.session['cart']={}
+        categories=Category.get_all_categories()
+        categoryId=request.GET.get('category')
+
+        if categoryId:
+            products=Product.get_all_products_by_id(categoryId)
+        else:
+            products=Product.get_all_products()
+
+        ctx={'products':products,'categories':categories}
+        return render(request,'store/index.html',ctx)
+
     def post(self,request):
         product=request.POST.get('product')
         cart=request.session.get('cart')
         remove=request.POST.get('remove')
-
         if cart:
             quantity=cart.get(product)
             if quantity:
@@ -27,21 +41,4 @@ class Index(View):
             cart={}
             cart[product]=1
         request.session['cart']=cart
-        print(cart)
         return redirect('all')
-        
-    def get(self,request):
-        cart=request.session.get('cart')
-        if not cart:
-            request.session['cart']={}
-        categories=Category.get_all_categories()
-        categoryId=request.GET.get('category')
-
-        if categoryId:
-            products=Product.get_all_products_by_id(categoryId)
-        else:
-            products=Product.get_all_products()
-
-        ctx={'products':products,'categories':categories}
-        return render(request,'store/index.html',ctx)
-    

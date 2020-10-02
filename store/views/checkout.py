@@ -13,10 +13,8 @@ class Checkout(View):
         cart=request.session.get('cart')
         products=Product.get_products_by_id(list(cart.keys()))
 
-        print(address,phone,customer,cart)
-
         for product in products:
             order=Order(product=product,customer=Customer(id=customer),quantity=cart.get(str(product.id)),price=product.price,address=address,phone=phone,)
             order.save()
         request.session['cart']={}
-        return redirect('cart')
+        return redirect('orders')
